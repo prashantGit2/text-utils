@@ -1,24 +1,38 @@
-import logo from './logo.svg';
+import {useState} from 'react'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
 import './App.css';
+import Container from './components/Container';
+import Navbar from './components/Navbar';
+import TextUtil from './components/TextUtil';
+import About from './components/About';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [darkMode, setDarkMode] = useState(false)
+  return (<Router>
+    <div className='body'>
+      <Navbar Link={Link} title="TextUtils" dark={darkMode} setDarkMode={setDarkMode} />
+      <div className={`${darkMode?"bg-light":"bg-white"}  body`}>
+      <Routes>
+          
+          <Route path="/" element={<Container><TextUtil heading="Enter text"/></Container>}>
+            
+          </Route>
+          <Route path="/about" element={<Container><About /></Container>}>
+            </Route>
+          
+          
+      </Routes>
+        
+        
+      </div>
     </div>
+    </Router>
   );
 }
 
